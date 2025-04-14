@@ -1,3 +1,4 @@
+import os
 from utils import Model
 from llm_interface.openai_model import OpenAIModel
 from llm_interface.anthropic_model import AnthropicModel
