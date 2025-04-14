@@ -1,0 +1,17 @@
+# Core dependencies
+pandas>=1.5
+dataclasses; python_version < "3.7"
+
+# OpenAI API
+openai>=1.0.0
+
+# Anthropic API (Claude)
+anthropic>=0.3.11
+
+# (Optional) HuggingFace Transformers for DeepSeek or local models
+transformers>=4.37
+torch>=2.0
+
+# (Optional) for local inference or quantized models
+accelerate>=0.21
+sentencepiece  # For tokenization with some LLMs

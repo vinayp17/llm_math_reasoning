@@ -1,0 +1,26 @@
+Category,Model Name,Version,Notes
+Proprietary,GPT,gpt-4-turbo,Best-in-class reasoning; uses 128k context
+Proprietary,GPT,gpt-3.5-turbo-0125,"Cheaper, weaker at math"
+Proprietary,Claude,Claude 3 Opus,Excellent at chain-of-thought
+Proprietary,Claude,Claude 3 Sonnet,Balanced performance/cost
+Proprietary,Gemini,Gemini 1.5 Pro,Strong long-context and math
+Proprietary,Cohere,Command R+,Open-weight option for tool-augmented math
+Open-Weight,DeepSeek,DeepSeek-Math-RL,Specialized for math reasoning
+Open-Weight,DeepSeek,DeepSeek-V2.5,"MoE-based, strong generalist"
+Open-Weight,DeepSeek,DeepSeek-R1,Reinforcement-learned reasoning
+Open-Weight,LLaMA,LLaMA-2-13B,"Baseline open-weight, decent reasoning"
+Open-Weight,LLaMA,LLaMA-2-70B,"Baseline open-weight, decent reasoning"
+Open-Weight,Mixtral,Mixtral-8x7B,Very strong math performance
+Open-Weight,Mistral,Mistral-7B,"Small, fast, decent CoT"
+Open-Weight,Phi,Phi-2,Small model with strong math for size
+Open-Weight,Yi,Yi-34B,Competes with LLaMA-2-70B
+Open-Weight,Qwen,Qwen-72B,"High math performance, multilingual"
+Open-Weight,Gemma,Gemma-7B,"Newer model from Google, efficient"
+Open-Weight,WizardMath,WizardMath-13B,Math-optimized LLaMA variant
+Open-Weight,Puffin,Puffin 13B,Tuned on math datasets
+Open-Weight,Code LLaMA,Code LLaMA 34B,Strong at formal reasoning and symbolic math
+Math-Specialized,Minerva,Internal,"Math-tuned PaLM, for research"
+Math-Specialized,MathGPT,MathGPT-6.9B,"Public, math-only focus"
+Math-Specialized,Grok,Grok-1,Early reports show good reasoning
+Math-Specialized,WizardLM,"WizardMath, WizardLM v1.2",Math CoT tuning
+Math-Specialized,Pythia,Pythia-12B,Good for baseline comparisons
