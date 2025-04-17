@@ -15,7 +15,8 @@ def evaluate_accuracy(response: str, correct_answer: str) -> bool:
     """
     try:
         pred = extract_numeric_answer(response)
-        truth = extract_numeric_answer(correct_answer)
+        truth = float(correct_answer)
+        print(pred, truth)
         return int(round(pred)) == int(round(truth))
     except Exception:
         return False

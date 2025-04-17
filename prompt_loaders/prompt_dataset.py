@@ -1,7 +1,7 @@
 from datasets import load_dataset
 import re
 
-DEFAULT_PREFIX = "Please answer the following question in a single line ony similar to: The answer is "
+DEFAULT_PREFIX = "Please provide a single line answer only in the format:'The answer is'\nQuestion:"
 
 def load_prompts_by_dataset(name: str, n=None, prefix: str = DEFAULT_PREFIX):
     if name == "aqua_rat":
