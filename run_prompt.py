@@ -6,14 +6,22 @@ import csv
 from utils import Model
 from prompt_loaders.prompt_dataset import load_prompts_by_dataset
 from evaluators.evaluate_accuracy import evaluate_accuracy
+from evaluators.summary import plot_accuracy_summary
 from llm_interface.openai_model import OpenAIModel
 from llm_interface.anthropic_model import AnthropicModel
+from llm_interface.deepseek_model import DeepSeekModel
 
 def get_llm_instance(model: Model, api_keys: dict):
     if model.model_name.lower() == "gpt":
         return OpenAIModel(model.version, api_keys["openai"])
     elif model.model_name.lower() == "claude":
         return AnthropicModel(model.version, api_keys["anthropic"])
+    elif model.model_name.lower() == "deepseek":
+        return DeepSeekModel(
+            model_name=model.version,
+            api_key=api_keys["deepseek"],
+            api_url=api_keys["deepseek_url"]
+        )
     else:
         raise ValueError(f"Unsupported model type: {model.model_name}")
 
@@ -77,11 +85,16 @@ def main(
     df.to_csv(output_path, index=False)
     print(f"✅ Evaluation complete. Results saved to {output_path}")
 
+    #Plot Summary
+    #plot_accuracy_summary(output_path)
+
 
 if __name__ == "__main__":
     api_keys = {
         "openai": os.getenv("OPENAI_API_KEY"),
+        "deepseek": os.getenv("DEEPSEEK_API_KEY"),
+        "deepseek_url": "https://api.deepseek.com/v1/chat/completions",
         #"anthropic": "<your-anthropic-key>"
     }
 
-    main(models_csv="small_eval_list.csv", api_keys=api_keys)
+    main(models_csv="small_eval_list.csv", api_keys=api_keys, num_prompts=5)
