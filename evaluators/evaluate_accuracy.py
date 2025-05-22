@@ -4,7 +4,8 @@ def extract_numeric_answer(text: str) -> float:
     """
     Extract the first numeric value after 'The answer is'.
     """
-    match = re.search(r"The answer is\s+([\-+]?\d*\.?\d+)", text.strip(), re.IGNORECASE)
+    #match = re.search(r"The answer is\s+([\-+]?\d*\.?\d+)", text.strip(), re.IGNORECASE)
+    match = re.search(r"The answer is.*?([-+]?\d*\.?\d+)", text, re.IGNORECASE)
     if match:
         return float(match.group(1))
     raise ValueError(f"No numeric value found in text: {text}")
