@@ -10,6 +10,7 @@ from evaluators.summary import plot_accuracy_summary
 from llm_interface.openai_model import OpenAIModel
 from llm_interface.anthropic_model import AnthropicModel
 from llm_interface.deepseek_model import DeepSeekModel
+from llm_interface.open_weight_model import OpenWeightModel
 
 def get_llm_instance(model: Model, api_keys: dict):
     if model.model_name.lower() == "gpt":
@@ -21,6 +22,10 @@ def get_llm_instance(model: Model, api_keys: dict):
             model_name=model.version,
             api_key=api_keys["deepseek"],
             api_url=api_keys["deepseek_url"]
+        )
+    elif model.model_name.lower() == "qwen" or model.model_name.lower() == "llama":
+        return OpenWeightModel(
+            model_name=model.version,
         )
     else:
         raise ValueError(f"Unsupported model type: {model.model_name}")
@@ -50,6 +55,7 @@ def evaluate_models_on_prompts(models, prompts, api_keys):
             results.append({
                 "model_name": model.model_name,
                 "version": model.version,
+                "prompt" : p["prompt"],
                 #"prompt_id": p["id"],
                 "response": response,
                 "correct": p["answer"],
@@ -94,7 +100,9 @@ if __name__ == "__main__":
         "openai": os.getenv("OPENAI_API_KEY"),
         "deepseek": os.getenv("DEEPSEEK_API_KEY"),
         "deepseek_url": "https://api.deepseek.com/v1/chat/completions",
+        #"qwen": os.getenv("QWEN_API_KEY"),
+        #"qwen_url": "https://api.qwen.ai/v1/chat/completions"
         #"anthropic": "<your-anthropic-key>"
     }
 
-    main(models_csv="small_eval_list.csv", api_keys=api_keys, num_prompts=5)
+    main(models_csv="small_eval_list.csv", api_keys=api_keys, num_prompts=1)
