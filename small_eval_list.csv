@@ -2,4 +2,3 @@ Category,Model Name,Version,Notes
 Proprietary,GPT,gpt-4-turbo,Best-in-class reasoning; uses 128k context
 Proprietary,GPT,gpt-3.5-turbo-0125,"Cheaper, weaker at math"
 Open-Weight,DeepSeek,deepseek-chat,Reinforcement-learned reasoning
-Open-Weight,Qwen,Qwen/Qwen1.5-0.5B,Causal language model
