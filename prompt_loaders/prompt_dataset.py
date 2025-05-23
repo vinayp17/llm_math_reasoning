@@ -6,6 +6,8 @@ DEFAULT_PREFIX = "Please provide a single line answer only in the format:'The an
 def load_prompts_by_dataset(name: str, n=None, prefix: str = DEFAULT_PREFIX):
     if name == "aqua_rat":
         return load_aqua_rat_prompts(n, prefix)
+    elif name == "gsm8k":
+        return load_gsm8k(n)
     else:
         raise ValueError(f"Unsupported dataset: {name}")
 
@@ -23,7 +25,7 @@ def load_gsm8k(n=None):
         prompts.append({
             #"id": item["id"],
             "prompt": question,
-            "answer": str(numeric_answer)
+            "answer": item["answer"]
         })
     return prompts
 

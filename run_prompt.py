@@ -1,4 +1,5 @@
 import os
+import argparse
 from datetime import datetime
 import pandas as pd
 from tqdm import tqdm
@@ -96,6 +97,27 @@ def main(
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Run math dataset evaluation")
+
+    parser.add_argument(
+        "--dataset",
+        type=str,
+        required=True,
+        help="Name of the dataset to use (e.g., gsm8k, math_qa)"
+    )
+    
+    parser.add_argument(
+        "--num_prompts",
+        type=int,
+        default=10,
+        help="Number of prompts to evaluate from the dataset"
+    )
+
+    args = parser.parse_args()
+
+    print(f"Dataset selected: {args.dataset}")
+    print(f"Number of prompts to evaluate: {args.num_prompts}")
+
     api_keys = {
         "openai": os.getenv("OPENAI_API_KEY"),
         "deepseek": os.getenv("DEEPSEEK_API_KEY"),
@@ -105,4 +127,4 @@ if __name__ == "__main__":
         #"anthropic": "<your-anthropic-key>"
     }
 
-    main(models_csv="small_eval_list.csv", api_keys=api_keys, num_prompts=1)
+    main(models_csv="small_eval_list.csv", api_keys=api_keys, num_prompts=args.num_prompts, dataset_name=args.dataset)
