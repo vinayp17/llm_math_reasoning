@@ -7,7 +7,7 @@ def load_prompts_by_dataset(name: str, n=None, prefix: str = DEFAULT_PREFIX):
     if name == "aqua_rat":
         return load_aqua_rat_prompts(n, prefix)
     elif name == "gsm8k":
-        return load_gsm8k(None, prefix)
+        return load_gsm8k(n, prefix)
     elif name == "algebra__polynomial_roots" or name == "algebra__linear_1d_composed" or name == "algebra__linear_1d" or name == "algebra__linear_2d_composed" or name == "algebra__linear_2d":
         return load_math_dataset(name, n, prefix)
     else:
