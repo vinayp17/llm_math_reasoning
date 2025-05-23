@@ -15,6 +15,18 @@ def extract_numeric_from_option(option_text: str) -> float:
         return float(match.group(0))
     raise ValueError(f"No numeric value found in option: {option_text}")
 
+def load_gsm8k(n=None):
+    ds = load_dataset("gsm8k", 'main')
+    prompts = []
+    for item in ds['test'].select(range(n)) if n else ds['test']:
+        question = item['question']
+        prompts.append({
+            #"id": item["id"],
+            "prompt": question,
+            "answer": str(numeric_answer)
+        })
+    return prompts
+
 def load_aqua_rat_prompts(n=None, prefix: str = DEFAULT_PREFIX):
     ds = load_dataset("aqua_rat", split="validation")
     prompts = []
