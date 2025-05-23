@@ -7,7 +7,7 @@ def load_prompts_by_dataset(name: str, n=None, prefix: str = DEFAULT_PREFIX):
     if name == "aqua_rat":
         return load_aqua_rat_prompts(n, prefix)
     elif name == "gsm8k":
-        return load_gsm8k(n)
+        return load_gsm8k(None, prefix)
     elif name == "algebra__polynomial_roots" or name == "algebra__linear_1d_composed" or name == "algebra__linear_1d" or name == "algebra__linear_2d_composed" or name == "algebra__linear_2d":
         return load_math_dataset(name, n, prefix)
     else:
@@ -32,14 +32,14 @@ def load_math_dataset(name, n=None, prefix: str = DEFAULT_PREFIX):
     return prompts
 
 
-def load_gsm8k(n=None):
+def load_gsm8k(n=None, prefix: str = DEFAULT_PREFIX):
     ds = load_dataset("gsm8k", 'main')
     prompts = []
     for item in ds['test'].select(range(n)) if n else ds['test']:
         question = item['question']
         prompts.append({
             #"id": item["id"],
-            "prompt": question,
+            "prompt": f"{prefix}\n{question}",
             "answer": item["answer"]
         })
     return prompts
