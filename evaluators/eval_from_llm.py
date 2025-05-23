@@ -7,13 +7,13 @@ from llm_interface.openai_model import OpenAIModel
 def process_csv_with_llm(csv_path: str, output_path: str, llm: OpenAIModel):
     df = pd.read_csv(csv_path)
 
-    judgments = []
+    judgements = []
     for idx, row in tqdm(df.iterrows(), desc="Querying LLM"):
         response = str(row["response"]).strip()
         correct = str(row["correct"]).strip()
 
         if not response or not correct:
-            judgments.append("Skipped - Empty field")
+            judgements.append("Skipped - Empty field")
             continue
 
         prompt = (
@@ -24,11 +24,11 @@ def process_csv_with_llm(csv_path: str, output_path: str, llm: OpenAIModel):
         )
 
         verdict = llm.query(prompt)
-        judgments.append(verdict)
+        judgements.append(verdict)
 
-    df["llm_judgment"] = judgments
+    df["llm_judgement"] = judgements
     df.to_csv(output_path, index=False)
-    print(f"LLM judgments saved to: {output_path}")
+    print(f"LLM judgements saved to: {output_path}")
 
 def main():
     parser = argparse.ArgumentParser(description="Compare LLM responses to correct answers in CSV.")
