@@ -8,6 +8,8 @@ def load_prompts_by_dataset(name: str, n=None, prefix: str = DEFAULT_PREFIX):
         return load_aqua_rat_prompts(n, prefix)
     elif name == "gsm8k":
         return load_gsm8k(n)
+    elif name == "algebra__polynomial_roots" or name == "algebra__linear_1d_composed" or name == "algebra__linear_1d" or name == "algebra__linear_2d_composed" or name == "algebra__linear_2d":
+        return load_math_dataset(name, n, prefix)
     else:
         raise ValueError(f"Unsupported dataset: {name}")
 
@@ -16,6 +18,19 @@ def extract_numeric_from_option(option_text: str) -> float:
     if match:
         return float(match.group(0))
     raise ValueError(f"No numeric value found in option: {option_text}")
+
+def load_math_dataset(name, n=None, prefix: str = DEFAULT_PREFIX):
+    ds = load_dataset("math_dataset", name, trust_remote_code=True)
+    prompts = []
+    for item in ds['test'].select(range(n)) if n else ds['test']:
+        question = item['question']
+        prompts.append({
+            #"id": item["id"],
+            "prompt": f'{prefix}\n{question}',
+            "answer": item["answer"],
+        })
+    return prompts
+
 
 def load_gsm8k(n=None):
     ds = load_dataset("gsm8k", 'main')
