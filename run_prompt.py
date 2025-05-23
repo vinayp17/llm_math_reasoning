@@ -105,7 +105,7 @@ if __name__ == "__main__":
         required=True,
         help="Name of the dataset to use (e.g., gsm8k, math_qa)"
     )
-    
+
     parser.add_argument(
         "--num_prompts",
         type=int,
@@ -127,4 +127,5 @@ if __name__ == "__main__":
         #"anthropic": "<your-anthropic-key>"
     }
 
-    main(models_csv="small_eval_list.csv", api_keys=api_keys, num_prompts=args.num_prompts, dataset_name=args.dataset)
+    #If num_prompts is zero, let's read everything :)
+    main(models_csv="small_eval_list.csv", api_keys=api_keys, num_prompts=None if not args.num_prompts else args.num_prompts, dataset_name=args.dataset)
